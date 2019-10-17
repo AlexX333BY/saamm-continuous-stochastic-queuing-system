@@ -6,7 +6,7 @@
 #include <memory>
 
 namespace queuing_system {
-class runnable : public std::enable_shared_from_this<runnable> {
+    class runnable : public std::enable_shared_from_this<runnable> {
     public:
         runnable();
         virtual ~runnable();
