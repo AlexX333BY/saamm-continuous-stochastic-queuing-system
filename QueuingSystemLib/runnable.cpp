@@ -18,14 +18,26 @@ void runnable::run()
     }
 }
 
-void runnable::stop()
+void runnable::signal_to_stop()
 {
     if (should_run) {
         should_run = false;
         on_stop();
+    }
+}
+
+void runnable::join()
+{
+    if (!should_run && thread) {
         thread->join();
         thread.reset();
     }
+}
+
+void runnable::stop()
+{
+    signal_to_stop();
+    join();
 }
 
 bool runnable::is_running() const

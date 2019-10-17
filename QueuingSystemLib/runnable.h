@@ -12,6 +12,8 @@ namespace queuing_system {
         virtual ~runnable();
 
         void run();
+        void signal_to_stop();
+        void join();
         void stop();
         bool is_running() const;
 
