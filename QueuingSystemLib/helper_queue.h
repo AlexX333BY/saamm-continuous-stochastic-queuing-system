@@ -17,6 +17,7 @@ namespace queuing_system {
         void add_customer(const std::shared_ptr<customer> &customer);
         std::shared_ptr<customer> get_customer();
         void stop();
+        void reset();
 
     private:
         std::deque<std::shared_ptr<customer>> customers;

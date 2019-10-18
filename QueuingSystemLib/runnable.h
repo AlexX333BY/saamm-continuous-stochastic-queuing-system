@@ -16,6 +16,7 @@ namespace queuing_system {
         void join();
         void stop();
         bool is_running() const;
+        virtual void reset() = 0;
 
     protected:
         virtual void on_stop() = 0;

@@ -2,9 +2,10 @@
 
 using namespace queuing_system;
 
-customer::customer(const std::chrono::milliseconds& produce_time, const std::shared_ptr<helper_queue>& queue)
+customer::customer(const double intensity, const std::chrono::milliseconds& max_time,
+        const std::shared_ptr<helper_queue>& queue)
     : total_wait_time(0),
-    produce_time(produce_time),
+    generator(intensity, max_time),
     customers_queue(queue),
     state_change_notify_cv(),
     state()
@@ -35,7 +36,7 @@ void customer::thread_routine()
         state = customer_state::waiting;
         {
             std::unique_lock<std::mutex> lock(state_change_mutex);
-            was_wait_for_produce_interrupted = state_change_notify_cv.wait_for(lock, produce_time, [this] {
+            was_wait_for_produce_interrupted = state_change_notify_cv.wait_for(lock, generator(), [this] {
                 return !is_running();
             });
         }
@@ -56,4 +57,10 @@ void customer::thread_routine()
             }
         }
     }
+}
+
+void customer::reset()
+{
+    stop();
+    total_wait_time = std::chrono::nanoseconds(0);
 }

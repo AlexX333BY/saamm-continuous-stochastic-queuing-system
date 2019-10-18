@@ -40,3 +40,10 @@ std::shared_ptr<customer> helper_queue::get_customer()
 
     return result;
 }
+
+void helper_queue::reset()
+{
+    std::unique_lock<std::mutex> lock(customers_mutex);
+    customers.clear();
+    is_running = true;
+}
