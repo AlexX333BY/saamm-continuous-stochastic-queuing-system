@@ -5,6 +5,7 @@ set(HEADERS
         helper_queue.h
         customer.h
         server.h
+        time_generator.h
 )
 
 set(SOURCES
@@ -12,6 +13,7 @@ set(SOURCES
         helper_queue.cpp
         customer.cpp
         server.cpp
+        time_generator.cpp
 )
 
 add_library(QueuingSystemLib ${HEADERS} ${SOURCES})
