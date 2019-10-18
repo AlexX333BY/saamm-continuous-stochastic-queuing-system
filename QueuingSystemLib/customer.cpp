@@ -4,16 +4,16 @@ using namespace queuing_system;
 
 customer::customer(const double intensity, const std::chrono::milliseconds& max_time,
         const std::shared_ptr<helper_queue>& queue)
-    : total_wait_time(0),
-    generator(intensity, max_time),
-    customers_queue(queue),
-    state_change_notify_cv(),
-    state()
+    : total_response_time(0),
+      generator(intensity, max_time),
+      customers_queue(queue),
+      state_change_notify_cv(),
+      state()
 { }
 
-const std::chrono::nanoseconds& customer::get_total_wait_time() const
+const std::chrono::nanoseconds& customer::get_total_response_time() const
 {
-    return total_wait_time;
+    return total_response_time;
 }
 
 void customer::on_stop()
@@ -42,7 +42,7 @@ void customer::thread_routine()
         }
 
         if (!was_wait_for_produce_interrupted) {
-            const std::chrono::time_point waiting_start_time_point = std::chrono::system_clock::now();
+            const std::chrono::system_clock::time_point waiting_start_time_point = std::chrono::system_clock::now();
 
             customers_queue->add_customer(std::dynamic_pointer_cast<customer>(shared_from_this()));
             {
@@ -53,7 +53,7 @@ void customer::thread_routine()
             }
 
             if (is_running()) {
-                total_wait_time += std::chrono::system_clock::now() - waiting_start_time_point;
+                total_response_time += std::chrono::system_clock::now() - waiting_start_time_point;
             }
         }
     }
@@ -62,5 +62,5 @@ void customer::thread_routine()
 void customer::reset()
 {
     stop();
-    total_wait_time = std::chrono::nanoseconds(0);
+    total_response_time = std::chrono::nanoseconds(0);
 }

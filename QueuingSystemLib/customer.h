@@ -14,7 +14,7 @@ namespace queuing_system {
         customer(const double intensity, const std::chrono::milliseconds& max_time,
                 const std::shared_ptr<helper_queue>& queue);
 
-        const std::chrono::nanoseconds& get_total_wait_time() const;
+        const std::chrono::nanoseconds& get_total_response_time() const;
         void notify_processed();
         void reset() final;
 
@@ -28,7 +28,7 @@ namespace queuing_system {
             processed
         };
 
-        std::chrono::nanoseconds total_wait_time;
+        std::chrono::nanoseconds total_response_time;
         std::shared_ptr<helper_queue> customers_queue;
         std::condition_variable state_change_notify_cv;
         customer_state state;
