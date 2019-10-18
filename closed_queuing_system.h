@@ -19,7 +19,7 @@ public:
     closed_queuing_system(const size_t customers_count, const double customer_intensity, const size_t servers_count,
             const double server_intensity, const std::chrono::milliseconds& time_interval);
 
-    run_result run_for(const size_t time_intervals_count);
+    run_result run_for(const unsigned int time_intervals_count);
 
 private:
     std::vector<std::shared_ptr<queuing_system::customer>> customers;

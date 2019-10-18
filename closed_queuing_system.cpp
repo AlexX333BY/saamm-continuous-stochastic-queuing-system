@@ -14,7 +14,7 @@ closed_queuing_system::closed_queuing_system(const size_t customers_count, const
     }
 }
 
-closed_queuing_system::run_result closed_queuing_system::run_for(const size_t time_intervals_count)
+closed_queuing_system::run_result closed_queuing_system::run_for(const unsigned int time_intervals_count)
 {
     for (const std::shared_ptr<queuing_system::customer>& customer : customers) {
         customer->run();
