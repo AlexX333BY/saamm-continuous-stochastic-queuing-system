@@ -15,6 +15,7 @@ set(HEADERS
 set(SOURCES
         closed_queuing_system.cpp
         model_parameters_parser.cpp
+        main.cpp
 )
 
 add_executable(QueuingSystem ${HEADERS} ${SOURCES})
