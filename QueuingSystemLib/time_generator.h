@@ -11,6 +11,7 @@ namespace queuing_system {
         time_generator(const double intensity, const std::chrono::milliseconds& max_time);
 
         std::chrono::milliseconds operator()();
+
     private:
         std::mt19937 random_generator;
         std::exponential_distribution<> distribution;
