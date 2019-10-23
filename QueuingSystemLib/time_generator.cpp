@@ -6,6 +6,6 @@ time_generator::time_generator(const double intensity, const std::chrono::millis
     : maximum_time(max_time), random_generator(std::random_device()()), distribution(intensity)
 { }
 
-std::chrono::milliseconds time_generator::operator()() {
-    return std::chrono::milliseconds((int64_t)(maximum_time.count() * distribution(random_generator)));
+std::chrono::nanoseconds time_generator::operator()() {
+    return std::chrono::nanoseconds((int64_t)(maximum_time.count() * distribution(random_generator)));
 }

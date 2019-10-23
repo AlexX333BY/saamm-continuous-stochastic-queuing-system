@@ -10,12 +10,12 @@ namespace queuing_system {
     public:
         time_generator(const double intensity, const std::chrono::milliseconds& max_time);
 
-        std::chrono::milliseconds operator()();
+        std::chrono::nanoseconds operator()();
 
     private:
         std::mt19937 random_generator;
         std::exponential_distribution<> distribution;
-        const std::chrono::milliseconds maximum_time;
+        const std::chrono::nanoseconds maximum_time;
     };
 }
 
